@@ -96,9 +96,21 @@ var playState = {
         cloud1.scale.x *= -1;
 
         gems = game.add.group();
+        mushrooms = game.add.group();
 
         gems.enableBody = true;
+        mushrooms.enableBody = true;
 
+        for (var k = 0; k < 5; k++) {
+            var mushroom = mushrooms.create(k * 200, 0, 'mushroom');
+            var mushroom2 = mushrooms.create(k * 220, 250, 'mushroom');
+
+            mushroom.body.gravity.y = 120;
+            mushroom2.body.gravity.y = 150;
+
+            mushroom.body.bounce.y = 0.2 + Math.random() * 0.2;
+            mushroom2.body.bounce.y = 0.2 + Math.random() * 0.2;
+        }
 
         for (var i = 0; i < 10; i++) {
             var gem = gems.create(i * 120, 0, 'gem');
@@ -111,7 +123,10 @@ var playState = {
             gem3.body.gravity.y = 15;
             gem4.body.gravity.y = 15;
 
-            gem.body.bounce.y = 0.6 + Math.random() * 0.3;
+            gem.body.bounce.y = 0.4 + Math.random() * 0.3;
+            gem2.body.bounce.y = 0.6 + Math.random() * 0.3;
+            gem3.body.bounce.y = 0.4 + Math.random() * 0.3;
+            gem4.body.bounce.y = 0.6 + Math.random() * 0.3;
         }
 
         var cloud2 = game.add.image(680, 23, 'cloud-1');
@@ -120,11 +135,17 @@ var playState = {
     update: function () {
         var hitPlatform = game.physics.arcade.collide(player, platforms);
         var gemHitPlatform = game.physics.arcade.collide(gems, platforms);
+        var mushroomHitPlatform = game.physics.arcade.collide(mushrooms, platforms);
         var playerKillGem = game.physics.arcade.overlap(player, gems, killGem, null, this);
+        var playerKillMushroom = game.physics.arcade.overlap(player, mushrooms, killMushroom, null, this);
         var hitEnemy = game.physics.arcade.collide(enemies, platforms, gems);
 
         function killGem(player, gem) {
             gem.kill();
+        }
+
+        function killMushroom (player, mushroom) {
+            mushroom.kill();
         }
 
         player.body.velocity.x = 0;
