@@ -132,6 +132,7 @@ var playState = {
         var cloud2 = game.add.image(680, 23, 'cloud-1');
 
     },
+
     update: function () {
         var hitPlatform = game.physics.arcade.collide(player, platforms);
         var gemHitPlatform = game.physics.arcade.collide(gems, platforms);
