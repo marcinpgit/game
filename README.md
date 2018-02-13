@@ -1,2 +1,2 @@
 # game
-game with phaser
+game with phaser for NCIT project designed in scrum team in infoshare Academy.
